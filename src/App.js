@@ -1,9 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
-import SongsPage from "./components/songs/SongPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css';
+import HomePage from './components/HomePage.js';
+import SignUp from './components/SignUp.js';
+import Login from './components/Login.js';
+// import SpotifyAccountGenerator from './components/SpotifyAccount.js';
 
 function App() {
   return (
@@ -13,12 +16,17 @@ function App() {
           <NavLink to="/">
           <h3 className="navLink">Home</h3>
           </NavLink>
-          <NavLink to="/songs-page">
-            <h3 className="navLink">Search</h3>
+          <NavLink to="/login">
+          <h3 className="navLink">Login</h3>
+          </NavLink>
+          <NavLink to="/sign-up">
+          <h3 className="navLink">Sign Up</h3>
           </NavLink>
         </nav>
 
-          <Route exact path="/songs-page" component={SongsPage} />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/sign-up" component={SignUp} />
 
       </Router>
     </div>
