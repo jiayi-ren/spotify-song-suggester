@@ -2,7 +2,6 @@ import React from 'react';
 import Login from './Login.js';
 
 const Modal = props =>{
-    const {spanClick} = props
 
     return(
         <div className="modal">
