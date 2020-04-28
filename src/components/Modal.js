@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './Login.js';
+import SignUp from './SignUp.js';
 
 const Modal = props =>{
 
@@ -10,6 +11,7 @@ const Modal = props =>{
             <div className="modal-content">
                 <span className="modal-close" onClick={spanClick}>&times;</span>
                 <Login />
+                <SignUp />
             </div>
         </div>
     )
