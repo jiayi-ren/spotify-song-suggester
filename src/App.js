@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import HomePage from './components/HomePage.js';
-import SignUp from './components/SignUp.js';
-import Login from './components/Login.js';
-import SpotifyAccountGenerator from './components/SpotifyAccount.js';
+import MusicPage from './components/MusicPage';
+import UserPage from './components/UserPage.js';
 
 function App() {
+
+  const [savedList, setSaveList] = useState([])
+
+  const addToSavedList = song =>{
+    setSaveList([...savedList, song])
+  }
+
   return (
-    <HomePage />
-    // <Login />
-    // <SpotifyAccountGenerator />
-  );
+    <div>
+      {
+        savedList.map((song,index) =>{
+          return(
+            <div key={index}>
+              <p>{song}</p>
+            </div>
+          )
+        })
+      } 
+      <HomePage />
+      {/* <MusicPage addToSavedList={addToSavedList}/> */}
+      {/* <UserPage savedList={savedList}/> */}
+    </div>
+
+  )
 }
 
 export default App;
