@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+
+import SongsPage from "./components/songs/SongPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <nav>
+          <NavLink to="/">
+          <h3 className="navLink">Home</h3>
+          </NavLink>
+          <NavLink to="/songs-page">
+            <h3 className="navLink">Search</h3>
+          </NavLink>
+        </nav>
+
+          <Route exact path="/songs-page" component={SongsPage} />
+
+      </Router>
     </div>
   );
 }
