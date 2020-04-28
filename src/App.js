@@ -1,16 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css';
 import HomePage from './components/HomePage.js';
 import SignUp from './components/SignUp.js';
 import Login from './components/Login.js';
-import SpotifyAccountGenerator from './components/SpotifyAccount.js';
+// import SpotifyAccountGenerator from './components/SpotifyAccount.js';
 
 function App() {
   return (
-    <HomePage />
-    // <Login />
-    // <SpotifyAccountGenerator />
+    <div className="App">
+      <Router>
+        <nav>
+          <NavLink to="/">
+          <h3 className="navLink">Home</h3>
+          </NavLink>
+          <NavLink to="/login">
+          <h3 className="navLink">Login</h3>
+          </NavLink>
+          <NavLink to="/sign-up">
+          <h3 className="navLink">Sign Up</h3>
+          </NavLink>
+        </nav>
+
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/sign-up" component={SignUp} />
+
+      </Router>
+    </div>
   );
 }
 
