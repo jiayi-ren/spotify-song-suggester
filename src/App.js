@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/protected/ProtectedRoute";
 import './App.css';
 
 import HomePage from './components/HomePage.js';
 import MusicPage from './components/MusicPage';
 import UserPage from './components/UserPage.js';
+
 import Login from './components/Login.js';
 import SignUp from './components/SignUp';
-import Callback from './components/Callback';
+import Callback from './components/protected/Callback';
+import NewSearchList from './components/newFiles/NewSearchList';
+import NewSavedList from './components/newFiles/NewSavedList';
 
 
 function App() {
@@ -39,10 +42,10 @@ function App() {
               <h3 className="navLink">Login</h3>
             </NavLink>
             <NavLink to="/music">
-              <h3 className="navLink">Music</h3>
+              <h3 className="navLink">Search</h3>
             </NavLink>
-            <NavLink to="/music">
-              <h3 className="navLink">Music</h3>
+            <NavLink to="/dashboard">
+              <h3 className="navLink">Saved</h3>
             </NavLink>
           </nav>
           
@@ -50,12 +53,8 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={SignUp} />
           <Route path="/callback/:token" component={Callback} />
-          <ProtectedRoute exact path="/music">
-            <MusicPage addToSavedList={addToSavedList}/>  
-          </ProtectedRoute>
-          <Route exact path="/dashboard">
-            <UserPage savedList={savedList}/>
-          </Route>
+          <ProtectedRoute exact path="/music" component={NewSearchList} />
+          <ProtectedRoute exact path="/dashboard" component={NewSavedList} />
 
       </Router>
     </div>
