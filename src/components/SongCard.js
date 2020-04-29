@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
+import { SongContext } from "../context/SongContext";
 
 const SongCard = props =>{
+
+    const {isSearching, setIsSearching} = useContext(SongContext)
+
     const initialState = {
         name: "",
         artists: [],
@@ -33,12 +37,17 @@ const SongCard = props =>{
 
     const handleEdit = e => {
         e.preventDefault();
-        axiosWithAuth().put(`/api/favorites/${props.song.id}`, inputValues)
+        axiosWithAuth().put(`/api/favorites/${props.song.favorites_id}`, {
+            ...props.song,
+                name: inputValues.name
+        })
             .then(response => {
                 console.log({ response })
                 props.setSavedSongs(props.savedSongs.map(saved => {
-                    return saved.id === props.song.id ? response.data : saved
+                    return saved.favorites_id === props.song.favorites_id ? JSON.parse(response.config.data) : saved
                 }))
+                setIsEditing(false)
+                setInputValues(initialState)
             })
             .catch(err => {
                 console.log({ err })
@@ -47,13 +56,16 @@ const SongCard = props =>{
 
     const handleDelete = e => {
         e.preventDefault();
-        axiosWithAuth().delete(`/api/favorites/${props.song.id}`)
+        console.log('banana')
+        axiosWithAuth().delete(`/api/favorites/${props.song.favorites_id}`)
             .then(response => {
+                console.log('strawberry')
                 console.log({ response })
-                props.setSavedSongs(props.savedSongs.filter(saved => saved.id !== props.song.id))
+                props.setSavedSongs(props.savedSongs.filter(saved => saved.favorites_id !== props.song.favorites_id))
             })
             .catch(err => {
                 console.log({ err })
+                console.log('orange')
             })
     }
 
@@ -61,7 +73,7 @@ const SongCard = props =>{
         e.preventDefault();
         axiosWithAuth().post('/api/favorites', props.song)
             .then(response => {
-                console.log({ response })
+                console.log({ response },"handleAdd Works")
                 props.setSavedSongs([
                     ...props.savedSongs,
                     response.data
@@ -69,6 +81,7 @@ const SongCard = props =>{
             })
             .catch(err => {
                 console.log({ err })
+                console.log(props.song.artists)
             })
     }
 
@@ -76,16 +89,23 @@ const SongCard = props =>{
         <>
         <div className="song-card">
             <p>Track: {name}</p>
-            <ul>Artists:    
+            {/* <ul>Artists:    
             {   artists.map((artist, index) =>{
                 return <li key={index}>{artist}</li>
                 })
             }
-            </ul>
+            </ul> */}
             <p>Duration: {mins}:{secs}</p>
+
+            
+            {!isSearching && <div>
             <button onClick={editing}>EDIT</button>
             <button onClick={handleDelete}>DELETE</button>
-            <button onClick={handleAdd}>ADD</button>
+            </div>
+            }
+            
+
+            {isSearching && <button onClick={handleAdd}>ADD</button>}
         </div>
 
         {isEditing && <form onSubmit={handleEdit}>
@@ -95,20 +115,6 @@ const SongCard = props =>{
                             value={inputValues.name}
                             onChange={handleChange}
                             placeholder="name..."
-                        />
-                        <input 
-                            name="artists"
-                            type="text"
-                            value={inputValues.artists}
-                            onChange={handleChange}
-                            placeholder="artists..."
-                        />
-                        <input 
-                            name="duration"
-                            type="text"
-                            value={inputValues.duration}
-                            onChange={handleChange}
-                            placeholder="duration..."
                         />
                         <button>Update</button>
                       </form>}
