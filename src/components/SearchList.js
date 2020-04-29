@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth.js";
 import SongCard from "./SongCard.js";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+
+import { SongContext } from "../context/SongContext";
 
 
 const SearchList = props => {
@@ -40,10 +42,16 @@ const SearchList = props => {
                 onChange={handleChange}
                 placeholder="search..."
             />
+            <button>Search</button>
         </form>
 
-        {searchedSongs && searchedSongs.map(song => {
-            return <SongCard key={song.id} song={song} />
+        {searchedSongs && searchedSongs.map((song,index) => {
+            return (
+                <div key={index}>
+                <SongCard song={song} /> 
+                </div>
+                )
+
         })}
         </>
     )
