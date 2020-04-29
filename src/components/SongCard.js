@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
+
 const SongCard = props =>{
     const initialState = {
-        title: "",
-        artist: "",
+        name: "",
+        artists: [],
         duration: "",
         id: props.song.id
     }
 
-    const { title, artist, duration} = props.song
+    const { name, artists, duration_ms} = props.song
     const [isEditing, setIsEditing] = useState(false)
     const [inputValues, setInputValues] = useState(initialState)
+
+    const mins = Math.floor((duration_ms/1000/60) << 0)
+    const secs = ("0" + Math.floor((duration_ms/1000) % 60)).slice(-2)
 
     const handleChange = e => {
         e.preventDefault();
@@ -71,9 +75,14 @@ const SongCard = props =>{
     return(
         <>
         <div className="song-card">
-            <p>{title}</p>
-            <p>{artist}</p>
-            <p>{duration}</p>
+            <p>Track: {name}</p>
+            <ul>Artists:    
+            {   artists.map((artist, index) =>{
+                return <li key={index}>{artist}</li>
+                })
+            }
+            </ul>
+            <p>Duration: {mins}:{secs}</p>
             <button onClick={editing}>EDIT</button>
             <button onClick={handleDelete}>DELETE</button>
             <button onClick={handleAdd}>ADD</button>
@@ -81,18 +90,18 @@ const SongCard = props =>{
 
         {isEditing && <form onSubmit={handleEdit}>
                         <input 
-                            name="title"
+                            name="name"
                             type="text"
-                            value={inputValues.title}
+                            value={inputValues.name}
                             onChange={handleChange}
-                            placeholder="title..."
+                            placeholder="name..."
                         />
                         <input 
-                            name="artist"
+                            name="artists"
                             type="text"
-                            value={inputValues.artist}
+                            value={inputValues.artists}
                             onChange={handleChange}
-                            placeholder="artist..."
+                            placeholder="artists..."
                         />
                         <input 
                             name="duration"
