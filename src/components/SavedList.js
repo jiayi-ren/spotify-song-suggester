@@ -23,7 +23,11 @@ const SavedList = props => {
         <>
         <h2>Saved Songs</h2>
         {savedSongs && savedSongs.map(song => {
-            return <SongCard key={song.id} song={song} savedSongs={savedSongs} setSavedSongs={setSavedSongs} />
+            return (
+                <div>
+                <SongCard key={song.id} song={song} savedSongs={savedSongs} setSavedSongs={setSavedSongs} />
+                </div>
+            )
         })}
         </>
     )
