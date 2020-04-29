@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
+
 const SongCard = props =>{
     const initialState = {
         name: "",
-        artists: "",
-        album_name: "",
+        artists: [],
+        duration: "",
         id: props.song.id
     }
 
-    const { name, artists, album_name} = props.song
+    const { name, artists, duration_ms} = props.song
     const [isEditing, setIsEditing] = useState(false)
     const [inputValues, setInputValues] = useState(initialState)
+
+    const mins = Math.floor((duration_ms/1000/60) << 0)
+    const secs = ("0" + Math.floor((duration_ms/1000) % 60)).slice(-2)
 
     const handleChange = e => {
         e.preventDefault();
@@ -69,7 +73,7 @@ const SongCard = props =>{
         e.preventDefault();
         axiosWithAuth().post('/api/favorites', props.song)
             .then(response => {
-                console.log({ response })
+                console.log({ response },"handleAdd Works")
                 props.setSavedSongs([
                     ...props.savedSongs,
                     response.data
@@ -77,15 +81,21 @@ const SongCard = props =>{
             })
             .catch(err => {
                 console.log({ err })
+                console.log(props.song.artists)
             })
     }
 
     return(
         <>
         <div className="song-card">
-            <p>{name}</p>
-            <p>{artists}</p>
-            <p>{album_name}</p>
+            <p>Track: {name}</p>
+            {/* <ul>Artists:    
+            {   artists.map((artist, index) =>{
+                return <li key={index}>{artist}</li>
+                })
+            }
+            </ul> */}
+            <p>Duration: {mins}:{secs}</p>
             <button onClick={editing}>EDIT</button>
             <button onClick={handleDelete}>DELETE</button>
             <button onClick={handleAdd}>ADD</button>
@@ -99,7 +109,7 @@ const SongCard = props =>{
                             onChange={handleChange}
                             placeholder="name..."
                         />
-                        {/* <input 
+                        <input 
                             name="artists"
                             type="text"
                             value={inputValues.artists}
@@ -112,7 +122,7 @@ const SongCard = props =>{
                             value={inputValues.album_name}
                             onChange={handleChange}
                             placeholder="album name..."
-                        /> */}
+                        />
                         <button>Update</button>
                       </form>}
         </>

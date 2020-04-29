@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import './App.css';
@@ -11,6 +11,7 @@ import SavedList from './components/SavedList';
 
 
 function App() {
+  // const [isSearching, setIsSearching] = useState(false)
 
   return (
     <div className="App">
