@@ -164,7 +164,7 @@ const SignUp = props =>{
 
                 {/* Password */}
                 <label>
-                    <input className="input" type="text" name='password' value={formValues.password} onChange={onInputChange} placeholder="Enter Password"></input>
+                    <input className="input" type="password" name='password' value={formValues.password} onChange={onInputChange} placeholder="Enter Password"></input>
                 </label>
                 <p>{formErrors.password}</p>
 

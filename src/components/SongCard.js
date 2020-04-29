@@ -19,9 +19,18 @@ const SongCard = props =>{
     const { name, artists, duration_ms} = props.song
     const [isEditing, setIsEditing] = useState(false)
     const [inputValues, setInputValues] = useState(initialState)
+    const [togglePanel, setTogglePanel] = useState(false)
 
     const mins = Math.floor((duration_ms/1000/60) << 0)
     const secs = ("0" + Math.floor((duration_ms/1000) % 60)).slice(-2)
+
+    const toggle = e => {
+        if(togglePanel === false){
+            setTogglePanel(true)
+        }else{
+            setTogglePanel(false)
+        }
+    }
 
     const handleChange = e => {
         e.preventDefault();
@@ -88,7 +97,9 @@ const SongCard = props =>{
 
     return(
         <>
-        <div className="song-card">
+        <div className="song-card" >
+            {!togglePanel &&
+            <div onClick={toggle}>
             <p>Track: {name}</p>
             {/* <ul>Artists:    
             {   artists.map((artist, index) =>{
@@ -97,7 +108,8 @@ const SongCard = props =>{
             }
             </ul> */}
             <p>Duration: {mins}:{secs}</p>
-            <FeaturedSong details={props.song}/>
+            </div>
+            }
             
             {!isSearching && <div>
             <button onClick={editing}>EDIT</button>
@@ -119,6 +131,9 @@ const SongCard = props =>{
                         />
                         <button>Update</button>
                       </form>}
+            {togglePanel &&
+                <div onClick={toggle}><FeaturedSong details={props.song}/></div>
+            }
         </>
     )
 }
