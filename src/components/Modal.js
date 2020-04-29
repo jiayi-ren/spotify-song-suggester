@@ -11,6 +11,7 @@ const Modal = props =>{
             <div className="modal-content">
                 <span className="modal-close" onClick={spanClick}>&times;</span>
                 <Login />
+                <h3>Just Wanna try out our app?</h3>
                 <SignUp />
             </div>
         </div>
