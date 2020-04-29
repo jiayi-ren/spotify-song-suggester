@@ -4,19 +4,17 @@ import ProtectedRoute from "./components/protected/ProtectedRoute";
 import './App.css';
 
 import HomePage from './components/HomePage.js';
-
-
 import Login from './components/Login.js';
-import SignUp from './components/SignUp';
 import Callback from './components/protected/Callback';
-import NewSearchList from './components/newFiles/NewSearchList';
-import NewSavedList from './components/newFiles/NewSavedList';
+import SearchList from './components/SearchList';
+import SavedList from './components/SavedList';
 
 
 function App() {
 
   return (
     <div className="App">
+
       <Router>
 
           <nav>
@@ -36,10 +34,9 @@ function App() {
           
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/sign-up" component={SignUp} />
           <Route path="/callback/:token" component={Callback} />
-          <ProtectedRoute exact path="/music" component={NewSearchList} />
-          <ProtectedRoute exact path="/dashboard" component={NewSavedList} />
+          <ProtectedRoute exact path="/music" component={SearchList} />
+          <ProtectedRoute exact path="/dashboard" component={SavedList} />
 
       </Router>
     </div>

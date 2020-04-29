@@ -1,5 +1,6 @@
 import React from 'react';
 import icon from '../assests/images/Spotify_Icon_RGB_Green.png'
+import SignUp from './SignUp';
 
 const url = 'http://localhost:3000/callback/'
 
@@ -8,7 +9,7 @@ const Login = props =>{
     const loginLink = `https://spotify-song-api.herokuapp.com/api/auth/spotify?redirect_url=${url}`
 
     return(
-        <div>
+        <div className="login">
             <h3>Already have a Spotify Account?</h3>
             <button className="sign-in-btn">
                 <a href={loginLink}>
@@ -21,6 +22,7 @@ const Login = props =>{
             <button className="sign-in-btn">
                 <a href='https://www.spotify.com/us/signup/'>Sign up Here!</a>
             </button>
+            <SignUp />
         </div>
     )
 }

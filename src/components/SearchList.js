@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import SongCard from "../SongCard";
+import SongCard from "./SongCard.js";
 
-const NewSearchList = props => {
+const SearchList = props => {
     const initialValue = {
         input: ""
     }
@@ -32,6 +32,7 @@ const NewSearchList = props => {
 
     return (
         <>
+        <h2>Search Songs</h2>
         <form onSubmit={handleSubmit} >
             <input 
                 name="search"
@@ -49,4 +50,4 @@ const NewSearchList = props => {
     )
 }
 
-export default NewSearchList;
+export default SearchList;
