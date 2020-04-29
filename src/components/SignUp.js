@@ -105,7 +105,7 @@ const SignUp = props =>{
     const onRegister = event =>{
         event.preventDefault()
 
-        if(formValues.username ==''|| formValues.email==''|| formValues.password==''|| formValues.term === false){
+        if(formValues.username ===''|| formValues.email===''|| formValues.password===''|| formValues.term === false){
             setSubmitErrors(submitErrorMsg)
         }else{
             const newUser = {
@@ -130,7 +130,7 @@ const SignUp = props =>{
 
     return (
         <div className="sign-up">
-            <h3>Just checking? No problem🥰</h3>
+            <h3>Just checking? No problem<span role="img" aria-label="face with hearts">🥰</span></h3>
             <form className="form">
             
                 {/* Username */}
