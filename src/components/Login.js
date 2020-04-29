@@ -1,8 +1,7 @@
 import React from 'react';
 import icon from '../assests/images/Spotify_Icon_RGB_Green.png'
 
-const hidden = process.env.REACT_APP_LOGIN_REDIRECT //url saved in .env
-const url = 'http://localhost:3000/callback'
+const url = 'http://localhost:3000/callback/'
 
 const Login = props =>{
 
