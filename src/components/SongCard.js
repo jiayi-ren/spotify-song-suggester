@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import FeaturedSong from './FeaturedSong';
 
 
 const SongCard = props =>{
@@ -86,6 +87,7 @@ const SongCard = props =>{
             <button onClick={editing}>EDIT</button>
             <button onClick={handleDelete}>DELETE</button>
             <button onClick={handleAdd}>ADD</button>
+            <FeaturedSong details={props.song}/>
         </div>
 
         {isEditing && <form onSubmit={handleEdit}>

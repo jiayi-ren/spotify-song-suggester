@@ -1,5 +1,5 @@
 import React from 'react';
-import icon from '../assests/images/Spotify_Icon_RGB_Green.png'
+import icon from '../assests/images/Spotify_Icon_RGB_Green.png';
 import SignUp from './SignUp';
 
 const url = 'http://localhost:3000/callback/'

@@ -1,24 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import * as yup from 'yup';
+import axios from 'axios';
 
 const initFormValues = {
-    username: '',
+    name: '',
     email: '',
     password: '',
     term: false
 }
 
 const initFormErrors = {
-    username: "",
+    name: "",
     email: "",
     password: "",
     term: "",
 }
 
 const formSchema = yup.object().shape({
-    username:yup
+    name:yup
         .string()
-        .required('Username is required')
+        .required('Name is required')
         .min(2, 'Name must have at least 3 characters!'),
     email: yup
         .string()
@@ -41,12 +42,24 @@ const SignUp = props =>{
     const [formValues, setFormValues] = useState(initFormValues)
     const [formErrors, setFormErrors] = useState(initFormErrors)
     const [submitError, setSubmitErrors] = useState("")
+    const [signupStatus, setSignupStatus] = useState("")
     const [users, setUsers] = useState([])
 
-    ///////TO DO: Post user to database////
-
+    /////// Post user to database////
+    const postUser = user =>{
+        axios.post('https://spotify-song-api.herokuapp.com/api/auth/register', user)
+            .then(res =>{
+                setSignupStatus("Congrats! You're in, Have fun with our app!")
+               
+            })
+            .catch(err =>{
+                console.log(err)
+                setSignupStatus("Oh no, this email has been registered already. Try another one!")
+            })
+    }
     //////////////////////////////////////
 
+    ///////Form Input Handler////////////
     const onInputChange = event =>{
         const name = event.target.name
         const value = event.target.value
@@ -62,7 +75,7 @@ const SignUp = props =>{
             })
         })
         .catch(invalid =>{
-            console.log(invalid)
+            console.log(invalid.message)
             setFormErrors({
                 ...formErrors,
                 [name]: invalid.message
@@ -75,6 +88,7 @@ const SignUp = props =>{
         })
     }
 
+    //////Form Checkbox Change Handler/////
     const onCheckboxChange = event =>{
         const name = event.target.name
         const isChecked = event.target.checked
@@ -89,7 +103,7 @@ const SignUp = props =>{
             })
         })
         .catch(invalid =>{
-            console.log(invalid)
+            console.log(invalid.message)
             setFormErrors({
                 ...formErrors,
                 [name]: invalid.message
@@ -102,14 +116,15 @@ const SignUp = props =>{
         })
     }
 
+    //////Form Submit Handler/////////////
     const onRegister = event =>{
         event.preventDefault()
 
-        if(formValues.username ===''|| formValues.email===''|| formValues.password===''|| formValues.term === false){
+        if(formValues.name ===''|| formValues.email===''|| formValues.password===''|| formValues.term === false){
             setSubmitErrors(submitErrorMsg)
         }else{
             const newUser = {
-                username: formValues.username,
+                name: formValues.name,
                 email: formValues.email,
                 password: formValues.password
             }
@@ -119,11 +134,12 @@ const SignUp = props =>{
                 newUser
             ])
             
-            /// To Do:postUser
+            postUser(newUser)
             setFormValues(initFormValues)
         }
     }
 
+    ///////Display submit error when required is missing//////
     useEffect(()=>{
         setSubmitErrors("")
     }, [formValues])
@@ -131,13 +147,14 @@ const SignUp = props =>{
     return (
         <div className="sign-up">
             <h3>Just checking? No problem<span role="img" aria-label="face with hearts">🥰</span></h3>
+            <h4>{signupStatus}</h4>
             <form className="form">
             
                 {/* Username */}
                 <label >
-                    <input className="input" type="text" name='username' value={formValues.username} onChange={onInputChange} placeholder="What should we call you?"></input>
+                    <input className="input" type="text" name='name' value={formValues.name} onChange={onInputChange} placeholder="What should we call you?"></input>
                 </label>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.name}</p>
 
                 {/* Email */}
                 <label>
