@@ -26,11 +26,7 @@ const HomePage = props =>{
 
     return (
         <div className="home-container">
-            {/* <Nav /> */}
-            <button name="modalButton" onClick={modalClick}>
-                <NavLink className="nav-link" to='/login'>Login</NavLink>
-            </button>
-            {/* <Modal spanClick={spanClick}/> */}
+            <h1>Spotify Song Suggester</h1>
         </div>
     )
 }

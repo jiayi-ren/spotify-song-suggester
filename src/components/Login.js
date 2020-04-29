@@ -1,5 +1,6 @@
 import React from 'react';
 import icon from '../assests/images/Spotify_Icon_RGB_Green.png'
+import SignUp from './SignUp';
 
 const hidden = process.env.REACT_APP_LOGIN_REDIRECT //url saved in .env
 const url = 'http://localhost:3000/callback'
@@ -22,6 +23,7 @@ const Login = props =>{
             <button className="sign-in-btn">
                 <a href='https://www.spotify.com/us/signup/'>Sign up Here!</a>
             </button>
+            <SignUp />
         </div>
     )
 }

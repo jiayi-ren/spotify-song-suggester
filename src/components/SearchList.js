@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import SongCard from "../SongCard";
+import SongCard from "./SongCard.js";
 
 const SearchList = props => {
     const initialValue = {

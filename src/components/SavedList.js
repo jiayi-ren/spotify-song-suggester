@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import SongCard from "../SongCard";
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import SongCard from "./SongCard";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const SavedList = props => {
 
