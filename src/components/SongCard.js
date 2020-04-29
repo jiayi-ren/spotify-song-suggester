@@ -3,7 +3,7 @@ import React from 'react';
 import SearchList from './SearchList';
 import SavedList from './SavedList';
 
-const Card = props =>{
+const SongCard = props =>{
 
     const { title, artist, duration} = props.song
 
@@ -16,4 +16,4 @@ const Card = props =>{
     )
 }
 
-export default Card
+export default SongCard;

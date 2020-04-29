@@ -11,7 +11,6 @@ const sample = [
     {id: 3, title: 'title 4', artist: 'artist 1', duration: 'duration 1'}
 ]
 
-const init = []
 let start = 0
 
 const SearchList = props =>{
@@ -19,7 +18,7 @@ const SearchList = props =>{
     const {searchedSong, addToSavedList} = props
 
     // const [search, setSearch] = useState('')
-    const [songList, setSongList] = useState(init)
+    const [songList, setSongList] = useState([])
 
     ///////////TO DO: Get song list from Database Server based on Search/////
     // const getSearch = song =>{
@@ -33,10 +32,7 @@ const SearchList = props =>{
     // }
 
     useEffect(()=>{
-        console.log("outsie"+start)
         if(start === 1){
-            console.log("start is "+start)
-            console.log("SearchList submit")
             setSongList(sample)
         }
     },[searchedSong])
@@ -55,10 +51,7 @@ const SearchList = props =>{
     // ]
 
     const saveSong = event =>{
-        const addToSavedList = props.addToSavedList;
         addToSavedList(event.target.value)
-        console.log("save handler"+event.target.value)
-        console.log("saved")
     }
 
     return(

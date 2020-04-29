@@ -4,7 +4,7 @@ import SavedList from './SavedList';
 const UserPage = props =>{
 
     const {savedList} = props
-
+    
     return (
         <div>
             <SavedList savedList={savedList}/>

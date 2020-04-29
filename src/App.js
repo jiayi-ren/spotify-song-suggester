@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css';
+import Nav from './components/Nav.js';
 import HomePage from './components/HomePage.js';
 import MusicPage from './components/MusicPage';
 import UserPage from './components/UserPage.js';
+import Login from './components/Login.js';
+
 
 function App() {
 
@@ -14,7 +18,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="App">
       {
         savedList.map((song,index) =>{
           return(
@@ -24,11 +28,21 @@ function App() {
           )
         })
       } 
-      <HomePage />
-      {/* <MusicPage addToSavedList={addToSavedList}/> */}
-      {/* <UserPage savedList={savedList}/> */}
-    </div>
+      <Router>
+          <Nav />
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/music">
+            <MusicPage addToSavedList={addToSavedList}/>  
+          </Route>
+          <Route exact path="/dashboard">
+            <UserPage savedList={savedList}/>
+          </Route>
 
+      </Router>
+    </div>
   )
 }
 
