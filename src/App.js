@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import './App.css';
 
 import HomePage from './components/HomePage.js';
-import MusicPage from './components/MusicPage';
-import UserPage from './components/UserPage.js';
+
 
 import Login from './components/Login.js';
 import SignUp from './components/SignUp';
@@ -16,24 +15,10 @@ import NewSavedList from './components/newFiles/NewSavedList';
 
 function App() {
 
-  const [savedList, setSaveList] = useState([])
-
-  const addToSavedList = song =>{
-    setSaveList([...savedList, song])
-  }
-
   return (
     <div className="App">
-      {
-        savedList.map((song,index) =>{
-          return(
-            <div key={index}>
-              <p>{song}</p>
-            </div>
-          )
-        })
-      } 
       <Router>
+
           <nav>
             <NavLink to="/">
               <h3 className="navLink">Home</h3>
