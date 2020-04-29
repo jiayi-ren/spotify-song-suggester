@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import SongCard from "./SongCard.js";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
+import { SongContext } from "../context/SongContext";
+
 
 const SearchList = props => {
     const initialValue = ""

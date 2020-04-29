@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
+import { SongContext } from "../context/SongContext";
 
 const SongCard = props =>{
+
+    const {isSearching, setIsSearching} = useContext(SongContext)
+
     const initialState = {
         name: "",
         artists: [],
@@ -40,17 +44,13 @@ const SongCard = props =>{
             .then(response => {
                 console.log({ response })
                 props.setSavedSongs(props.savedSongs.map(saved => {
-                    return saved.id === props.song.favorites_id ? response.data : saved
+                    return saved.favorites_id === props.song.favorites_id ? JSON.parse(response.config.data) : saved
                 }))
+                setIsEditing(false)
+                setInputValues(initialState)
             })
             .catch(err => {
                 console.log({ err })
-                console.log(inputValues.name)
-                console.log(props.song.name)
-                console.log(props.song.id)
-                console.log(props.song.album_name)
-                console.log(props.song.energy)
-                console.log(props.song)
             })
     }
 
@@ -61,7 +61,7 @@ const SongCard = props =>{
             .then(response => {
                 console.log('strawberry')
                 console.log({ response })
-                props.setSavedSongs(props.savedSongs.filter(saved => saved.id !== props.song.favorites_id))
+                props.setSavedSongs(props.savedSongs.filter(saved => saved.favorites_id !== props.song.favorites_id))
             })
             .catch(err => {
                 console.log({ err })
@@ -96,9 +96,16 @@ const SongCard = props =>{
             }
             </ul> */}
             <p>Duration: {mins}:{secs}</p>
+
+            
+            {!isSearching && <div>
             <button onClick={editing}>EDIT</button>
             <button onClick={handleDelete}>DELETE</button>
-            <button onClick={handleAdd}>ADD</button>
+            </div>
+            }
+            
+
+            {isSearching && <button onClick={handleAdd}>ADD</button>}
         </div>
 
         {isEditing && <form onSubmit={handleEdit}>
@@ -108,20 +115,6 @@ const SongCard = props =>{
                             value={inputValues.name}
                             onChange={handleChange}
                             placeholder="name..."
-                        />
-                        <input 
-                            name="artists"
-                            type="text"
-                            value={inputValues.artists}
-                            onChange={handleChange}
-                            placeholder="artists..."
-                        />
-                        <input 
-                            name="album_name"
-                            type="text"
-                            value={inputValues.album_name}
-                            onChange={handleChange}
-                            placeholder="album name..."
                         />
                         <button>Update</button>
                       </form>}
