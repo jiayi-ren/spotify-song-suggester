@@ -1,5 +1,6 @@
 import React from 'react';
-import Modal from './Modal.js';
+import {NavLink} from 'react-router-dom';
+// import Modal from './Modal.js';
 // import Nav from './Nav.js';
 
 const HomePage = props =>{
@@ -26,8 +27,10 @@ const HomePage = props =>{
     return (
         <div className="home-container">
             {/* <Nav /> */}
-            <button name="modalButton" onClick={modalClick}>Login</button>
-            <Modal spanClick={spanClick}/>
+            <button name="modalButton" onClick={modalClick}>
+                <NavLink className="nav-link" to='/login'>Login</NavLink>
+            </button>
+            {/* <Modal spanClick={spanClick}/> */}
         </div>
     )
 }

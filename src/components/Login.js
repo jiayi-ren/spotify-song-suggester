@@ -9,7 +9,7 @@ const Login = props =>{
     const loginLink = `https://spotify-song-api.herokuapp.com/api/auth/spotify?redirect_url=${url}`
 
     return(
-        <div>
+        <div className="login">
             <h3>Already have a Spotify Account?</h3>
             <button className="sign-in-btn">
                 <a href={loginLink}>

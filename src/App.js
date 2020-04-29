@@ -7,8 +7,10 @@ import HomePage from './components/HomePage.js';
 import MusicPage from './components/MusicPage';
 import UserPage from './components/UserPage.js';
 import Login from './components/Login.js';
+import SignUp from './components/SignUp';
 import DummyPage from './components/DummyPage';
 import Callback from './components/Callback';
+
 
 
 function App() {
@@ -35,7 +37,12 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/callback" component={Callback} />
           <ProtectedRoute exact path="/Dummy" component={DummyPage} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/login">
+            <div className="login-page">
+                <Login />
+                <SignUp />
+            </div>
+            </Route>
           <Route exact path="/music">
             <MusicPage addToSavedList={addToSavedList}/>  
           </Route>
