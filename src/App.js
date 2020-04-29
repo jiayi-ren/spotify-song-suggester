@@ -16,6 +16,7 @@ function App() {
     <div className="App">
 
       <Router>
+
           <nav>
             <NavLink to="/">
               <h3 className="navLink">Home</h3>

@@ -32,6 +32,7 @@ const SearchList = props => {
 
     return (
         <>
+        <h2>Search Songs</h2>
         <form onSubmit={handleSubmit} >
             <input 
                 name="search"

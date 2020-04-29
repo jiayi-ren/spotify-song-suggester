@@ -29,7 +29,7 @@ const SongCard = props =>{
 
     const handleEdit = e => {
         e.preventDefault();
-        axiosWithAuth().put(`url/${props.song.id}`, inputValues)
+        axiosWithAuth().put(`/api/favorites/${props.song.id}`, inputValues)
             .then(response => {
                 console.log({ response })
                 props.setSavedSongs(props.savedSongs.map(saved => {
@@ -43,7 +43,7 @@ const SongCard = props =>{
 
     const handleDelete = e => {
         e.preventDefault();
-        axiosWithAuth().delete(`url/${props.song.id}`)
+        axiosWithAuth().delete(`/api/favorites/${props.song.id}`)
             .then(response => {
                 console.log({ response })
                 props.setSavedSongs(props.savedSongs.filter(saved => saved.id !== props.song.id))
@@ -55,7 +55,7 @@ const SongCard = props =>{
 
     const handleAdd = e => {
         e.preventDefault();
-        axiosWithAuth().post('url', props.song)
+        axiosWithAuth().post('/api/favorites', props.song)
             .then(response => {
                 console.log({ response })
                 props.setSavedSongs([
