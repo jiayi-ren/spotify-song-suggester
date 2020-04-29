@@ -45,10 +45,10 @@ const SearchList = props => {
             <button>Search</button>
         </form>
 
-        {searchedSongs && searchedSongs.map(song => {
+        {searchedSongs && searchedSongs.map((song,index) => {
             return (
-                <div>
-                <SongCard key={song.id} song={song} /> 
+                <div key={index}>
+                <SongCard song={song} /> 
                 </div>
                 )
 

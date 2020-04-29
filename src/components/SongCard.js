@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import FeaturedSong from './FeaturedSong';
 
 import { SongContext } from "../context/SongContext";
 
@@ -96,7 +97,7 @@ const SongCard = props =>{
             }
             </ul> */}
             <p>Duration: {mins}:{secs}</p>
-
+            <FeaturedSong details={props.song}/>
             
             {!isSearching && <div>
             <button onClick={editing}>EDIT</button>

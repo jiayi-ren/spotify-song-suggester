@@ -22,10 +22,10 @@ const SavedList = props => {
     return (
         <>
         <h2>Saved Songs</h2>
-        {savedSongs && savedSongs.map(song => {
+        {savedSongs && savedSongs.map((song,index) => {
             return (
-                <div>
-                <SongCard key={song.id} song={song} savedSongs={savedSongs} setSavedSongs={setSavedSongs} />
+                <div key={index}>
+                <SongCard song={song} savedSongs={savedSongs} setSavedSongs={setSavedSongs} />
                 </div>
             )
         })}
