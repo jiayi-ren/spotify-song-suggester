@@ -90,12 +90,12 @@ const SongCard = props =>{
         <>
         <div className="song-card">
             <p>Track: {name}</p>
-            {/* <ul>Artists:    
+            <ul>Artists:    
             {   artists.map((artist, index) =>{
                 return <li key={index}>{artist}</li>
                 })
             }
-            </ul> */}
+            </ul>
             <p>Duration: {mins}:{secs}</p>
             <FeaturedSong details={props.song}/>
             
