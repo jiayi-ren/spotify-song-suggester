@@ -32,7 +32,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={SignUp} />
-          <Route path="/callback" component={Callback} />
+          <Route path="/callback/:token" component={Callback} />
           <ProtectedRoute exact path="/Dummy" component={DummyPage} />
       </Router>
     </div>

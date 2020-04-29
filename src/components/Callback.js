@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 const Callback = (props) => {
@@ -14,6 +14,10 @@ const Callback = (props) => {
            push('/Dummy')
         }
     }, [params.token])
+
+    return (
+        <div></div>
+    )
 }
 
 export default Callback;
