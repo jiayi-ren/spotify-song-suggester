@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, NavLink, Switch } from "react-router-do
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import './App.css';
 import icon from "../src/assests/images/android-chrome-192x192.png";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { SongContext } from "./context/SongContext";
 import HomePage from './components/HomePage.js';
@@ -36,22 +35,11 @@ function App() {
           </div>
           
           <SongContext.Provider value = {{ isSearching, setIsSearching, savedSongs, setSavedSongs }}>
-            <Route render={({location}) => (
-              <TransitionGroup>
-                <CSSTransition
-                  key={location.key}
-                  timeout={2000}
-                  classNames="fade">
-                  <Switch>
-                    <Route exact path="/" component={HomePage} />
-                    <Route exact path="/login" component={Login} />
-                    <Route path="/callback/:token" component={Callback} />
-                    <ProtectedRoute exact path="/music" component={MusicPage} />
-                    <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
-            )}/>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/login" component={Login} />
+            <Route path="/callback/:token" component={Callback} />
+            <ProtectedRoute exact path="/music" component={MusicPage} />
+            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           </SongContext.Provider>
 
       </Router>

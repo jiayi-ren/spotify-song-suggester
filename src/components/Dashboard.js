@@ -21,7 +21,7 @@ const Dashboard = props => {
     }, [])
 
     return (
-        <div className="dashboard">
+        <div className="dashboard fade-in">
         <h2>My favorites</h2>
         {savedSongs && savedSongs.map((song,index) => {
             return (

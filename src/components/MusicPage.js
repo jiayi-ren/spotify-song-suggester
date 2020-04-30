@@ -17,7 +17,6 @@ const MusicPage= props => {
     const [recommended, setRecommended] = useState([]);
 
     const getRecommended = e => {
-        e.preventDefault();
         axiosWithAuth().post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/predict', savedSongs)
             .then(response => {
                 console.log(response, "Got the recommended data")
@@ -32,6 +31,7 @@ const MusicPage= props => {
     ////// hide search section when recommend songs ///////
     const toggle = e => {
         if(togglePage === false){
+            // getRecommended()
             setTogglePage(true)
             setSuggestBtnText("Search for more songs")
         }else{
@@ -63,35 +63,39 @@ const MusicPage= props => {
     }
 
     return (
-        <div className="music">
+        <div className="music fade-in">
             {/* Search Section */}
-            {toggleSuggest &&
-                <button onClick={toggle}>{suggestBtnText}</button>
-            }
-            {!togglePage &&
-                <div className="search">
-                    <h2>Some Attractive texts</h2>
-                    {loginError}
-                    <form onSubmit={handleSubmit} >
-                        <input 
-                            name="search"
-                            type="text"
-                            value={search}
-                            onChange={handleChange}
-                            placeholder="Enter a track..."
-                            className="search-box"
-                        />
-                        <button>Search</button>
-                    </form>
-                    <div className="search-results">
-                    {searchedSongs && searchedSongs.map((song,index) => {
-                        return (
-                            <div key={index}>
-                            <SongCard song={song} /> 
-                            </div>
-                        )
-                    })}
+            <div className="search">
+                {toggleSuggest &&
+                    <div className="suggest-btn-wrapper">
+                        <p>{suggestBtnText}</p>
+                        <button className="suggest-btn" onClick={toggle}>Toggle Search results</button>
                     </div>
+                }
+                <h2>Some Attractive texts</h2>
+                {loginError}
+                <form onSubmit={handleSubmit} >
+                    <input 
+                        name="search"
+                        type="text"
+                        value={search}
+                        onChange={handleChange}
+                        placeholder="Enter a track..."
+                        className="search-box"
+                    />
+                    <button className="search-btn" onClick={handleSubmit}>Search</button>
+                </form>
+            </div>
+
+            {!togglePage &&
+                <div className="search-results">
+                {searchedSongs && searchedSongs.map((song,index) => {
+                    return (
+                        <div key={index}>
+                        <SongCard song={song} /> 
+                        </div>
+                    )
+                })}
                 </div>
             }
 
@@ -99,7 +103,7 @@ const MusicPage= props => {
             {/* TO DO */}
             {togglePage &&
                 <div className="suggester">
-                    <button onClick={getRecommended} >Get Recommended</button>
+                    <button className="suggest-btn" onClick={getRecommended}>Get Recommended</button>
                     {recommended && recommended.map((song,index) => {
                         return (
                             <div key={index}>
