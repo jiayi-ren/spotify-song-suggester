@@ -37,23 +37,18 @@
   }
 }
 
-.fade-enter{
+/* Page Transition */
+.fade-in {
+  animation: fadeIn ease 2s;
+}
+
+@keyframes fadeIn {
+  0% {
     opacity: 0;
-    z-index: 1;
-}
-
-.fade-enter-active {
+  }
+  100% {
     opacity: 1;
-    transition: opacity 1500ms linear 500ms;
-}
-
-.fade-exit {
-    opacity: 1;
-}
-
-.fade-exit-active {
-    opacity: 0;
-    transition: opacity 1500ms linear 500ms;
+  }
 }
 
 /* Nav bar */
@@ -191,9 +186,9 @@
   height: 100vh;
   background-image: url(../src/assests/images/vinyl-music-play-spinning-21148.jpg);
   background-size: cover;
-  overflow: hidden;
   transition: all 0.5s ease-in-out;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -201,10 +196,36 @@
 .search {
   color: #FFFFFF;
   font-size: 24px;
+  width: 80%;
+  margin-top: 200px;
 }
 
 .search-box {
   font-size: 24px;
   padding: 10px;
   width: 400px;
+}
+
+.search-btn {
+  font-size: 24px;
+  padding: 10px;
+  background-color: #1DB954;
+  color: #FFFFFF;
+}
+
+.suggest-btn-wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.suggest-btn {
+  font-size: 25px;
+  color: #FFFFFF;
+  background: #1DB954;
+  border: 2px dashed;
+  border-radius: 5px;
+}
+
+.suggester {
+  width: 100%;
 }
