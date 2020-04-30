@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 import styled from 'styled-components';
+import icon from '../assests/images/favicon-32x32.png';
 
 const StyledForm = styled.form`
     display: flex;
@@ -233,7 +234,7 @@ const SignUp = props =>{
                 <StyledCheckboxError>{formErrors.term}</StyledCheckboxError>
 
                 {/* Submit */}
-                <StyledButton name="register" onClick={onRegister}>Sign Up</StyledButton>
+                <StyledButton name="register" onClick={onRegister}>Sign Up&nbsp;<img className="icon" src={icon} alt="spotify song 5 icon"/></StyledButton>
                 <StyledSubmitError>{submitError}</StyledSubmitError>
             </StyledForm>
         </div>

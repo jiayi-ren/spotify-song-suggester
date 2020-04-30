@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { SongContext } from "../context/SongContext";
 import SongCard from "./SongCard";
-import { SongContext } from "../context/SongContext"
 
 const Dashboard = props => {
 
@@ -30,6 +30,7 @@ const Dashboard = props => {
                 </div>
             )
         })}
+        
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import './App.css';
+import icon from "../src/assests/images/android-chrome-192x192.png";
 
 import { SongContext } from "./context/SongContext";
 import HomePage from './components/HomePage.js';
@@ -18,21 +19,20 @@ function App() {
     <div className="App">
 
       <Router>
-
-          <nav className="nav">
-            <NavLink to="/">
-              <h3 className="navLink">Home</h3>
-            </NavLink>
-            <NavLink to="/login">
-              <h3 className="navLink">Login</h3>
-            </NavLink>
-            <NavLink to="/music" onClick={() => setIsSearching(true)}>
-              <h3 className="navLink">MusicPage</h3>
-            </NavLink>
-            <NavLink to="/dashboard" onClick={() => setIsSearching(false)}>
-              <h3 className="navLink">Dashboard</h3>
-            </NavLink>
-          </nav>
+          <div className="nav-bar">
+            <nav className="nav">
+              <span>
+              <img src={icon} alt="spotify song 5"className="nav-icon"/>
+              <h2>Spotify Song 5</h2>
+              </span>
+              <ul className="nav-list">
+                <li className="nav-item"><NavLink to="/" className="navLink">Home</NavLink></li>
+                <li className="nav-item"><NavLink to="/login"  className="navLink">Login</NavLink></li>
+                <li className="nav-item"><NavLink to="/music" onClick={() => setIsSearching(true)} className="navLink">Music</NavLink></li>
+                <li className="nav-item"><NavLink to="/dashboard" onClick={() => setIsSearching(false)} className="navLink">Dashboard</NavLink></li>
+              </ul>
+            </nav>
+          </div>
           
           <SongContext.Provider value = {{ isSearching, setIsSearching, savedSongs, setSavedSongs }}>
             <Route exact path="/" component={HomePage} />
