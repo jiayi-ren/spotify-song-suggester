@@ -11,7 +11,7 @@ const Callback = (props) => {
            push('/login') 
         } else {
            localStorage.setItem('token', JSON.stringify(token))
-           push('/Dummy')
+           push('/music')
         }
     }, [params.token])
 
