@@ -101,7 +101,7 @@ const SongCard = props =>{
             <p>Track: {name}</p>
             <ul>Artists:    
             {   artists.map((artist, index) =>{
-                return <li key={index}>{artist}</li>
+                return <p key={index}>{artist}</p>
                 })
             }
             </ul>
