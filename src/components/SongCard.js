@@ -115,7 +115,6 @@ const SongCard = props =>{
             </div>
             }
             
-
             {isSearching && <button onClick={handleAdd}>ADD</button>}
         </div>
 

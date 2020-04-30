@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import axios from "axios";
-import SongCard from "./SongCard.js";
-
 import { SongContext } from "../context/SongContext";
-
+import SongCard from "./SongCard.js";
 
 const MusicPage= props => {
     const initialValue = ""
@@ -12,13 +10,33 @@ const MusicPage= props => {
     const [search, setSearch] = useState(initialValue);
     const [searchedSongs, setSearchedSongs] = useState([]);
     const [togglePage, setTogglePage] = useState(false);
+    const [toggleSuggest, setToggleSuggest] = useState(false);
+    const [suggestBtnText, setSuggestBtnText] = useState("Ready to see our Recommendation?")
     const [loginError, setLoginError] = useState("")
+    const {savedSongs, setSavedSongs} = useContext(SongContext)
+    const [recommended, setRecommended] = useState([]);
 
+    const getRecommended = e => {
+        e.preventDefault();
+        axiosWithAuth().post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/predict', savedSongs)
+            .then(response => {
+                console.log(response)
+                
+            })
+            .catch(err => {
+                console.log({ err }, "There was an error posting to Recommended")
+                
+            })
+    }
+
+    ////// hide search section when recommend songs ///////
     const toggle = e => {
         if(togglePage === false){
             setTogglePage(true)
+            setSuggestBtnText("Search for more songs")
         }else{
             setTogglePage(false)
+            setSuggestBtnText("Ready to see our Recommendation?")
         }
     }
 
@@ -26,9 +44,11 @@ const MusicPage= props => {
         axiosWithAuth().get(`/api/spotify/search?q=${song}`)
         .then(res =>{
             setSearchedSongs(res.data)
+            setToggleSuggest(true)
         })
         .catch(err =>{
             setLoginError("Sorry, our app excels with Customized Recommendation. Please Sign-in.")
+            setToggleSuggest(false)
         })
     } 
 
@@ -45,9 +65,12 @@ const MusicPage= props => {
     return (
         <div className="music">
             {/* Search Section */}
+            {toggleSuggest &&
+                <button onClick={toggle}>{suggestBtnText}</button>
+            }
             {!togglePage &&
                 <div className="search">
-                    <h2>Some attractive texts</h2>
+                    <h2>Some Attractive texts</h2>
                     {loginError}
                     <form onSubmit={handleSubmit} >
                         <input 
@@ -70,11 +93,19 @@ const MusicPage= props => {
                     </div>
                 </div>
             }
+
             {/* Suggester Section */}
             {/* TO DO */}
             {togglePage &&
                 <div className="suggester">
-
+                    <button onClick={getRecommended} >Get Recommended</button>
+                    {recommended && recommended.map((song,index) => {
+                        return (
+                            <div key={index}>
+                                <SongCard song={song} recommended={recommended} setRecommended={setRecommended} />
+                            </div>
+                        )
+                    })}
                     
                 </div>
             }

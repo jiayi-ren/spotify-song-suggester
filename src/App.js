@@ -14,6 +14,7 @@ import MusicPage from './components/MusicPage';
 
 function App() {
   const [isSearching, setIsSearching] = useState(false)
+  const [savedSongs, setSavedSongs] = useState([]);
 
   return (
     <div className="App">
@@ -34,7 +35,7 @@ function App() {
             </nav>
           </div>
           
-          <SongContext.Provider value = {{ isSearching, setIsSearching }}>
+          <SongContext.Provider value = {{ isSearching, setIsSearching, savedSongs, setSavedSongs }}>
             <Route render={({location}) => (
               <TransitionGroup>
                 <CSSTransition
