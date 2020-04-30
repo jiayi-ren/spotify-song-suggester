@@ -69,13 +69,11 @@ const SongCard = props =>{
         console.log('banana')
         axiosWithAuth().delete(`/api/favorites/${props.song.favorites_id}`)
             .then(response => {
-                console.log('strawberry')
                 console.log({ response })
                 props.setSavedSongs(props.savedSongs.filter(saved => saved.favorites_id !== props.song.favorites_id))
             })
             .catch(err => {
                 console.log({ err })
-                console.log('orange')
             })
     }
 
