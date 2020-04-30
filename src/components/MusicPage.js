@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import axios from "axios";
-import SongCard from "./SongCard.js";
-
 import { SongContext } from "../context/SongContext";
-
+import SongCard from "./SongCard.js";
 
 const MusicPage= props => {
     const initialValue = ""
@@ -13,6 +11,21 @@ const MusicPage= props => {
     const [searchedSongs, setSearchedSongs] = useState([]);
     const [togglePage, setTogglePage] = useState(false);
     const [loginError, setLoginError] = useState("")
+    const {savedSongs, setSavedSongs} = useContext(SongContext)
+    const [recommended, setRecommended] = useState([]);
+
+    const getRecommended = e => {
+        e.preventDefault();
+        axiosWithAuth().post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/predict', savedSongs)
+            .then(response => {
+                console.log(response)
+                
+            })
+            .catch(err => {
+                console.log({ err }, "There was an error posting to Recommended")
+                
+            })
+    }
 
     const toggle = e => {
         if(togglePage === false){
@@ -43,11 +56,11 @@ const MusicPage= props => {
     }
 
     return (
-        <div className="music">
+        <div>
             {/* Search Section */}
             {!togglePage &&
                 <div className="search">
-                    <h2>Some attractive texts</h2>
+                    <h2>Search Songs</h2>
                     {loginError}
                     <form onSubmit={handleSubmit} >
                         <input 
@@ -56,10 +69,10 @@ const MusicPage= props => {
                             value={search}
                             onChange={handleChange}
                             placeholder="Enter a track..."
-                            className="search-box"
                         />
+                        <button>Search</button>
                     </form>
-                    <div className="search-results">
+
                     {searchedSongs && searchedSongs.map((song,index) => {
                         return (
                             <div key={index}>
@@ -67,14 +80,20 @@ const MusicPage= props => {
                             </div>
                         )
                     })}
-                    </div>
                 </div>
             }
             {/* Suggester Section */}
             {/* TO DO */}
             {togglePage &&
                 <div className="suggester">
-
+                    <button onClick={getRecommended} >Get Recommended</button>
+                    {recommended && recommended.map((song,index) => {
+                        return (
+                            <div key={index}>
+                                <SongCard song={song} recommended={recommended} setRecommended={setRecommended} />
+                            </div>
+                        )
+                    })}
                     
                 </div>
             }
