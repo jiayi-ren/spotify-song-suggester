@@ -21,8 +21,8 @@ const SongCard = props =>{
     const [inputValues, setInputValues] = useState(initialState)
     const [togglePanel, setTogglePanel] = useState(false)
 
-    const mins = Math.floor((duration_ms/1000/60) << 0)
-    const secs = ("0" + Math.floor((duration_ms/1000) % 60)).slice(-2)
+    const mins = duration_ms? Math.floor((duration_ms/1000/60) << 0): 0
+    const secs = duration_ms?("0" + Math.floor((duration_ms/1000) % 60)).slice(-2): "00"
 
     const toggle = e => {
         if(togglePanel === false){
@@ -115,7 +115,6 @@ const SongCard = props =>{
             </div>
             }
             
-
             {isSearching && <button onClick={handleAdd}>ADD</button>}
         </div>
 
