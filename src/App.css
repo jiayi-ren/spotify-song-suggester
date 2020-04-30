@@ -213,4 +213,15 @@
 
 .song-card {
   background-color: white;
+  width: 80%;
+  margin: 15px, 10%;
+}
+
+.song-title {
+  font-size: 2rem;
+}
+
+.songButton {
+  width: 15%;
+  height: 40px;
 }

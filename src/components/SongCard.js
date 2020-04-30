@@ -98,7 +98,7 @@ const SongCard = props =>{
         <div className="song-card" >
             {!togglePanel &&
             <div onClick={toggle}>
-            <p>Track: {name}</p>
+            <p className="song-title">Track: {name}</p>
             <ul>Artists:    
             {   artists.map((artist, index) =>{
                 return <p key={index}>{artist}</p>
@@ -110,12 +110,12 @@ const SongCard = props =>{
             }
             
             {!isSearching && <div>
-            <button onClick={editing}>EDIT</button>
-            <button onClick={handleDelete}>DELETE</button>
+            <button className="songButton" onClick={editing}>EDIT</button>
+            <button className="songButton" onClick={handleDelete}>DELETE</button>
             </div>
             }
             
-            {isSearching && <button onClick={handleAdd}>ADD</button>}
+            {isSearching && <button className="songButton" onClick={handleAdd}>ADD</button>}
         </div>
 
         {isEditing && <form onSubmit={handleEdit}>
