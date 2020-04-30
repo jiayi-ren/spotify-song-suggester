@@ -10,6 +10,8 @@ const MusicPage= props => {
     const [search, setSearch] = useState(initialValue);
     const [searchedSongs, setSearchedSongs] = useState([]);
     const [togglePage, setTogglePage] = useState(false);
+    const [toggleSuggest, setToggleSuggest] = useState(false);
+    const [suggestBtnText, setSuggestBtnText] = useState("Ready to see our Recommendation?")
     const [loginError, setLoginError] = useState("")
     const {savedSongs, setSavedSongs} = useContext(SongContext)
     const [recommended, setRecommended] = useState([]);
@@ -27,11 +29,14 @@ const MusicPage= props => {
             })
     }
 
+    ////// hide search section when recommend songs ///////
     const toggle = e => {
         if(togglePage === false){
             setTogglePage(true)
+            setSuggestBtnText("Search for more songs")
         }else{
             setTogglePage(false)
+            setSuggestBtnText("Ready to see our Recommendation?")
         }
     }
 
@@ -39,9 +44,11 @@ const MusicPage= props => {
         axiosWithAuth().get(`/api/spotify/search?q=${song}`)
         .then(res =>{
             setSearchedSongs(res.data)
+            setToggleSuggest(true)
         })
         .catch(err =>{
             setLoginError("Sorry, our app excels with Customized Recommendation. Please Sign-in.")
+            setToggleSuggest(false)
         })
     } 
 
@@ -56,11 +63,14 @@ const MusicPage= props => {
     }
 
     return (
-        <div>
+        <div className="music">
             {/* Search Section */}
+            {toggleSuggest &&
+                <button onClick={toggle}>{suggestBtnText}</button>
+            }
             {!togglePage &&
                 <div className="search">
-                    <h2>Search Songs</h2>
+                    <h2>Some Attractive texts</h2>
                     {loginError}
                     <form onSubmit={handleSubmit} >
                         <input 
@@ -69,10 +79,10 @@ const MusicPage= props => {
                             value={search}
                             onChange={handleChange}
                             placeholder="Enter a track..."
+                            className="search-box"
                         />
-                        <button>Search</button>
                     </form>
-
+                    <div className="search-results">
                     {searchedSongs && searchedSongs.map((song,index) => {
                         return (
                             <div key={index}>
@@ -80,8 +90,10 @@ const MusicPage= props => {
                             </div>
                         )
                     })}
+                    </div>
                 </div>
             }
+
             {/* Suggester Section */}
             {/* TO DO */}
             {togglePage &&

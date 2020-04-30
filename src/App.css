@@ -37,11 +37,32 @@
   }
 }
 
+.fade-enter{
+    opacity: 0;
+    z-index: 1;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1500ms linear 500ms;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 1500ms linear 500ms;
+}
+
+/* Nav bar */
 .nav-bar {
   display: block;
   position: fixed;
   top: 0;
-  background-color: #FFFFFF;
+  background-color: #000000;
+  color: #FFFFFF;
   width: 100vw;
   z-index: 10;
 }
@@ -77,7 +98,7 @@
 .navLink {
   text-decoration: none;
   padding: 10px 30px;
-  color: #000000;
+  color: #FFFFFF;
   transition: all 0.3s ease-in-out;
 }
 
@@ -86,6 +107,15 @@
   color: #FFFFFF;
 }
 
+/* Home Page */
+.home-container {
+  height: 100vh;
+  background-image: url(../src/assests/images/adult-band-black-and-white-concert-210766.jpg);
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* Login Page */
 .icon {
   width: 20px;
   vertical-align: bottom;
@@ -93,7 +123,7 @@
 
 .login-container {
   height: 100vh;
-  background-image: url('../src/assests/images/austin-neill-BzxBE7IaKf8-unsplash.jpg');
+  background-image: url(../src/assests/images/austin-neill-BzxBE7IaKf8-unsplash.jpg);
   background-size: cover;
   overflow: hidden;
   transition: all 0.5s ease-in-out;
@@ -123,6 +153,11 @@
   align-items: center;
 }
 
+.spotify-login-wrapper {
+  width: 100%;
+  height: 240px;
+}
+
 .app-login {
   width: 50%;
   border-left: 2px solid black;
@@ -139,10 +174,6 @@
   margin: 10px;
 }
 
-.sign-in-btn a {
-  text-decoration: none;
-}
-
 .login h4 {
   margin: 0;
 }
@@ -155,6 +186,7 @@
   content: '\2714';
 }
 
+/* Music Page */
 .music {
   height: 100vh;
   background-image: url(../src/assests/images/vinyl-music-play-spinning-21148.jpg);
