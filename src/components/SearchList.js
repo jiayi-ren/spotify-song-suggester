@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SongCard from "./SongCard.js";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-
-import { SongContext } from "../context/SongContext";
-
 
 const SearchList = props => {
     const initialValue = ""
@@ -32,6 +29,7 @@ const SearchList = props => {
     }
 
     return (
+
         <>
         <h2>Search Songs</h2>
         <form onSubmit={handleSubmit} >
@@ -51,7 +49,6 @@ const SearchList = props => {
                 <SongCard song={song} /> 
                 </div>
                 )
-
         })}
         </>
     )
