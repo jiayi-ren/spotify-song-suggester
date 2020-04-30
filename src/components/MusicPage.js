@@ -43,11 +43,11 @@ const MusicPage= props => {
     }
 
     return (
-        <div>
+        <div className="music">
             {/* Search Section */}
             {!togglePage &&
                 <div className="search">
-                    <h2>Search Songs</h2>
+                    <h2>Some attractive texts</h2>
                     {loginError}
                     <form onSubmit={handleSubmit} >
                         <input 
@@ -56,9 +56,10 @@ const MusicPage= props => {
                             value={search}
                             onChange={handleChange}
                             placeholder="Enter a track..."
+                            className="search-box"
                         />
                     </form>
-
+                    <div className="search-results">
                     {searchedSongs && searchedSongs.map((song,index) => {
                         return (
                             <div key={index}>
@@ -66,6 +67,7 @@ const MusicPage= props => {
                             </div>
                         )
                     })}
+                    </div>
                 </div>
             }
             {/* Suggester Section */}
