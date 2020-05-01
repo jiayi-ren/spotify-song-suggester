@@ -16,6 +16,7 @@ const MusicPage= props => {
     const {savedSongs, setSavedSongs} = useContext(SongContext)
     const [recommended, setRecommended] = useState([]);
 
+    console.log(savedSongs);
     const getRecommended = e => {
         e.preventDefault();
         console.log(savedSongs)
