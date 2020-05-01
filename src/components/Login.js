@@ -24,9 +24,7 @@ const StyledLoadMsg = styled.p`
     margin: 0 0 4px;
 `
 
-const url = 'https://frontend.spotify-song-5.now.sh/callback/'
-// const url = 'http://localhost:3000/callback/' //testgit 
-
+const url = `${window.location.href.replace(window.location.pathname, '')}/callback/ `
 
 const Login = props =>{
 

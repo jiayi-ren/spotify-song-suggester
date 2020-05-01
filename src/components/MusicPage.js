@@ -119,7 +119,7 @@ const MusicPage= props => {
                         <button className="suggest-btn" onClick={toggle}>Toggle Search results</button>
                     </div>
                 }
-                <h2>Give us your favourite track and ❤️ into your playlist<br/> We will surprise you with our recommendations! </h2>
+                <h2>Give us your favorite track and ❤️ into your playlist<br/> We will surprise you with our recommendations! </h2>
                 {loginError}
                 <form onSubmit={handleSubmit} >
                     <input 
