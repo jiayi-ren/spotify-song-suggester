@@ -11,12 +11,12 @@ const SongCard = props =>{
 
     const initialState = {
         name: "",
-        artists: [],
+        // artists: [],
         duration: "",
         id: props.song.id
     }
 
-    const { name, artists, duration_ms} = props.song
+    const { name, duration_ms} = props.song
     const [isEditing, setIsEditing] = useState(false)
     const [inputValues, setInputValues] = useState(initialState)
     const [togglePanel, setTogglePanel] = useState(false)
@@ -98,12 +98,12 @@ const SongCard = props =>{
             {!togglePanel &&
             <div onClick={toggle}>
             <p className="song-title">Track: {name}</p>
-            <ul>Artists:    
+            {/* <ul>Artists:    
             {   artists.map((artist, index) =>{
                 return <p key={index}>{artist}</p>
                 })
             }
-            </ul>
+            </ul> */}
             <p>Duration: {mins}:{secs}</p>
             </div>
             }
