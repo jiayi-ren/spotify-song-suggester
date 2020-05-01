@@ -24,12 +24,13 @@ const StyledLoadMsg = styled.p`
     margin: 0 0 4px;
 `
 
-const url = window.location.href.replace(window.location.pathname, '')
+const url = 'https://frontend.spotify-song-5.now.sh/callback/'
+// const url = 'http://localhost:3000/callback/' //test
 
 const Login = props =>{
 
     
-    const loginLink = `https://spotify-song-api.herokuapp.com/api/auth/spotify?redirect_url=${url}/callback/`
+    const loginLink = `https://spotify-song-api.herokuapp.com/api/auth/spotify?redirect_url=${url}`
 
     const [loadMsg, setLoadMsg] = useState("")
 
