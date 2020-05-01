@@ -27,6 +27,7 @@ function App() {
               </span>
               <ul className="nav-list">
                 <li className="nav-item"><NavLink to="/" className="navLink">Home</NavLink></li>
+                <li className="nav-item"><a className="navLink" href="https://spotifysongsuggestor.netlify.app/about.html">About Us</a></li>
                 <li className="nav-item"><NavLink to="/login"  className="navLink">Login</NavLink></li>
                 <li className="nav-item"><NavLink to="/music" onClick={() => setIsSearching(true)} className="navLink">Music</NavLink></li>
                 <li className="nav-item"><NavLink to="/dashboard" onClick={() => setIsSearching(false)} className="navLink">Dashboard</NavLink></li>

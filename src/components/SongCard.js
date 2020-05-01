@@ -93,32 +93,39 @@ const SongCard = props =>{
     }
 
     return(
-        <>
         <div className="song-card" >
-            {!togglePanel &&
-            <div onClick={toggle}>
-                <p className="song-title">Track: {name}</p>
-                <ul>Artists:    
-                {   artists.map((artist, index) =>{
-                    return <p key={index}>{artist}</p>
-                    })
-                }
-                </ul>
-                <p>Duration: {mins}:{secs}</p>
-            </div>
-            }
-            
-            {!isSearching && 
-                <div >
-                    <button className="songButton" onClick={editing}>EDIT</button>
-                    <button className="songButton" onClick={handleDelete}>DELETE</button>
+        {<div className="song-card-container">
+            <div className="song-card-wrapper">
+                <div className="favorites-name">{name}
+                {!isSearching && 
+                <div className="favorites-buttons">
+                    <div className="list-edit" onClick={editing}></div>
+                    <div className="list-delete" onClick={handleDelete}></div>
+                    <div className="features" onClick={toggle}></div>
                 </div>
+                }
+                </div>
+                <div className="favorites-song-artists">
+                {artists.map((artist, index) =>{
+                    if(index<artists.length){
+                        return <div key={index}>{artist},</div>
+                    }else{
+                        return <div key={index}>{artist}</div>
+                    }
+                })}
+                </div>
+                <div className="favorites-duration">{mins}:{secs}</div>
+            </div>
+            {togglePanel &&
+                <div className="song-visual" onClick={toggle}><FeaturedSong details={props.song}/></div>
             }
+        </div>
+        }
+            
             
             {isSearching && <button className="songButton" onClick={handleAdd}>ADD</button>}
-        </div>
 
-        {isEditing && <form onSubmit={handleEdit}>
+            {isEditing && <form onSubmit={handleEdit}>
                         <input 
                             name="name"
                             type="text"
@@ -128,10 +135,7 @@ const SongCard = props =>{
                         />
                         <button>Update</button>
                       </form>}
-            {togglePanel &&
-                <div classe="song-visual" onClick={toggle}><FeaturedSong details={props.song}/></div>
-            }
-        </>
+        </div>
     )
 }
 

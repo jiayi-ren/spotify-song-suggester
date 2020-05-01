@@ -4,7 +4,6 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 import { SongContext } from "../context/SongContext";
 import SongCard from "./SongCard.js";
-import FeaturedSong from "./FeaturedSong";
 import fullheart from "../assests/icons/redheart.png";
 
 const MusicPage= props => {
@@ -39,7 +38,8 @@ const MusicPage= props => {
                 
             })
     }
-
+    
+    
     const handleAdd = e => {
         const selectedSong = searchedSongs[e.target.parentElement.parentElement.rowIndex-1]
         const heart = e.target
@@ -49,11 +49,12 @@ const MusicPage= props => {
         axiosWithAuth().post('/api/favorites', selectedSong)
             .then(response => {
                 console.log({ response },"handleAdd Works")
+                console.log("not ok")
                 setSavedSongs([
                     ...savedSongs,
                     response.data
                 ])
-                
+                console.log("ok")
             })
             .catch(err => {
                 console.log(err)
@@ -63,11 +64,12 @@ const MusicPage= props => {
     ////// hide search section when recommend songs ///////
     const toggle = e => {
         if(togglePage === false){
-            // getRecommended()
+            setToggleSearchResults(false)
             setTogglePage(true)
             setSuggestBtnText("Search for more songs")
         }else{
             setTogglePage(false)
+            setToggleSearchResults(false)
             setSuggestBtnText("Ready to see our Recommendation?")
         }
     }
@@ -90,7 +92,7 @@ const MusicPage= props => {
         .catch(err =>{
             setLoginError("Sorry, our app excels with Customized Recommendation. Please Sign-in.")
             setToggleSuggest(false)
-            setToggleSearchResults(true)
+            setToggleSearchResults(false)
         })
     } 
 
