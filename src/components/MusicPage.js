@@ -18,6 +18,7 @@ const MusicPage= props => {
 
     const getRecommended = e => {
         e.preventDefault();
+        console.log(savedSongs)
         const newRecommended = savedSongs.map((song) => {
             delete song.artists
         })
