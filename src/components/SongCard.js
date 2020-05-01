@@ -66,7 +66,6 @@ const SongCard = props =>{
 
     const handleDelete = e => {
         e.preventDefault();
-        console.log('banana')
         axiosWithAuth().delete(`/api/favorites/${props.song.favorites_id}`)
             .then(response => {
                 console.log({ response })
