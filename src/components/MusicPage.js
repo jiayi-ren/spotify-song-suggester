@@ -21,22 +21,56 @@ const MusicPage= props => {
     const {savedSongs, setSavedSongs} = useContext(SongContext)
     const [recommended, setRecommended] = useState([]);
 
-    console.log(savedSongs);
-    const getRecommended = e => {
-        e.preventDefault();
-        console.log(savedSongs)
-        const newRecommended = savedSongs.map((song) => {
-                delete song.artists
-        })
-        console.log(newRecommended, "this is new recommended")
-        axiosWithAuth().post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/predict', savedSongs)
-            .then(response => {
-                console.log(response, "Got the recommended data")
-                setRecommended(response.data)
-            })
-            .catch(err => {
-                console.log({ err }, "There was an error posting to Recommended")
+    // console.log(savedSongs);
+    // const getRecommended = e => {
+    //     e.preventDefault();
+    //     console.log(savedSongs)
+    //     const newRecommended = savedSongs.map((song) => {
+    //             delete song.artists
+    //     })
+    //     console.log(newRecommended, "this is new recommended")
+    //     axiosWithAuth().post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/predict', savedSongs)
+    //         .then(response => {
+    //             console.log(response, "Got the recommended data")
+    //             setRecommended(response.data)
+    //         })
+    //         .catch(err => {
+    //             console.log({ err }, "There was an error posting to Recommended")
                 
+    //         })
+    // }
+    
+    let favorites = []
+    let modifiedList = []
+
+    const testRecommend = () =>{
+        axiosWithAuth().get('/api/favorites')
+            .then(res =>{
+                console.log("ok")
+                favorites = res.data
+                console.log(favorites)
+            })
+            .then(() =>{
+                console.log(favorites)
+                favorites.map( song => {
+                    delete song.favorites_id
+                    delete song.album_name
+                    delete song.duration_ms
+                    delete song.artists
+                    return song
+                })
+            })
+            .then(() =>{
+                axios.post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/', {data: modifiedList})
+                .then(res =>{
+                    console.log("got DS")
+                })
+                .catch(err =>{
+                    console.log("no DS")
+                })
+            })
+            .catch(err =>{
+                console.log(err)
             })
     }
 
@@ -63,11 +97,13 @@ const MusicPage= props => {
     ////// hide search section when recommend songs ///////
     const toggle = e => {
         if(togglePage === false){
-            // getRecommended()
+            testRecommend()
+            setToggleSearchResults(false)
             setTogglePage(true)
             setSuggestBtnText("Search for more songs")
         }else{
             setTogglePage(false)
+            setToggleSearchResults(false)
             setSuggestBtnText("Ready to see our Recommendation?")
         }
     }
@@ -90,7 +126,7 @@ const MusicPage= props => {
         .catch(err =>{
             setLoginError("Sorry, our app excels with Customized Recommendation. Please Sign-in.")
             setToggleSuggest(false)
-            setToggleSearchResults(true)
+            setToggleSearchResults(false)
         })
     } 
 
@@ -168,7 +204,7 @@ const MusicPage= props => {
             {/* TO DO */}
             {togglePage &&
                 <div className="suggester">
-                    <button className="suggest-btn" onClick={getRecommended}>Get Recommended</button>
+                    {/* <button className="suggest-btn" onClick={getRecommended}>Get Recommended</button> */}
                     {recommended && recommended.map((song,index) => {
                         return (
                             <div key={index}>

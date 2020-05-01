@@ -14,36 +14,43 @@ const FeaturedSong = props =>{
     const spec = {
         labels: ['Acousticness', 'Danceability','Energy', 'Liveness', 'Speechiness'],
         datasets: [
-            { data: [acoustic, danceable, energetic, live, speech]}
-        ]
+            {   data: [acoustic, danceable, energetic, live, speech],
+                backgroundColor: [
+                    '#FF6384','#4BC0C0','#FFCE56','#E7E9ED','#36A2EB'
+                  ],
+                hoverBackgroundColor: [
+                    '#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF'
+                ],
+                borderColor: '#FFFFFF'
+            }   
+        ],
+        
     }
 
     const mins = Math.floor((details.duration_ms/1000/60) << 0)
     const secs = ("0" + Math.floor((details.duration_ms/1000) % 60)).slice(-2)
 
     const styles = {
-        width: '800px'
+        width: '800px',
+        marginLeft: '180px',
     }
 
     return (
         <div className="polar-chart" style={styles}>
-            <div>
-                <p>Track: {details.name}</p>
-                <ul>Artists:    
-                {   details.artists.map((artist, index) =>{
-                    return <li key={index}>{artist}</li>
-                    })
-                }
-                </ul>
-                <p>Duration: {mins}:{secs}</p>
-            </div>
             <Polar 
                 data={spec}
                 options={{
                     title:{
                     display:true,
                     text:'Audio Features',
-                    fontSize:10
+                    fontSize:15,
+                    fontColor:'#FFFFFF'
+                    },
+                    legend:{
+                        labels:{
+                            fontSize:15,
+                            fontColor:'#FFFFFF'
+                        },
                     }
                 }}
             />
