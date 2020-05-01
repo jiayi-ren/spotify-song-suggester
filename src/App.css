@@ -103,25 +103,25 @@
 }
 
 /* Home Page */
-.home-container {
-  height: 100vh;
+.home-bg {
   background-image: url(../src/assests/images/adult-band-black-and-white-concert-210766.jpg);
+  background-attachment: fixed;
   background-size: cover;
-  overflow: hidden;
+  transition: all 0.5s ease-in-out;
 }
 
 /* Login Page */
+.login-bg {
+  background-image: url(../src/assests/images/austin-neill-BzxBE7IaKf8-unsplash.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+}
+
 .icon {
   width: 20px;
   vertical-align: bottom;
-}
-
-.login-container {
-  height: 100vh;
-  background-image: url(../src/assests/images/austin-neill-BzxBE7IaKf8-unsplash.jpg);
-  background-size: cover;
-  overflow: hidden;
-  transition: all 0.5s ease-in-out;
 }
 
 .login {
@@ -182,11 +182,13 @@
 }
 
 /* Music Page */
-.music {
-  height: 100vh;
+.music-bg {
   background-image: url(../src/assests/images/vinyl-music-play-spinning-21148.jpg);
   background-size: cover;
+  background-attachment: fixed;
   transition: all 0.5s ease-in-out;
+}
+.music {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -200,6 +202,10 @@
   margin-top: 200px;
 }
 
+.search h2 {
+  font-size: 20px;
+}
+
 .search-box {
   font-size: 24px;
   padding: 10px;
@@ -211,6 +217,48 @@
   padding: 10px;
   background-color: #1DB954;
   color: #FFFFFF;
+}
+
+.search-results-table {
+  width: 50%;
+  color: #FFFFFF;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin-top: 20px;
+}
+
+tr {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+tr:nth-child(even){background-color: gray;}
+
+td {
+  text-align: left;
+  font-size: 20px;
+  padding: 10px 0;
+}
+
+.first-column {
+  display: flex;
+}
+
+.list-add {
+  width: 22px;
+  height: 22px;
+  background-image: url(../src/assests/icons/redshapes.png);
+  background-size: contain;
+  margin: auto 6px;
+}
+
+.list-add:hover {
+  background-image: url(../src/assests/icons/redheart.png);
+}
+
+.list-add:active {
+  background-image: url(../src/assests/icons/redheart.png);
 }
 
 .suggest-btn-wrapper {
@@ -228,6 +276,14 @@
 
 .suggester {
   width: 100%;
+}
+
+/* Dashboard */
+.dashboard-bg {
+  background-image: url(../src/assests/images/black-and-white-music-musician-piano-87503.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  transition: all 0.5s ease-in-out;
 }
 
 /* Cards */

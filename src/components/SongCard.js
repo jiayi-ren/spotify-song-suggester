@@ -11,12 +11,12 @@ const SongCard = props =>{
 
     const initialState = {
         name: "",
-        // artists: [],
+        artists: [],
         duration: "",
         id: props.song.id
     }
 
-    const { name, duration_ms} = props.song
+    const { name, artists, duration_ms} = props.song
     const [isEditing, setIsEditing] = useState(false)
     const [inputValues, setInputValues] = useState(initialState)
     const [togglePanel, setTogglePanel] = useState(false)
@@ -97,21 +97,22 @@ const SongCard = props =>{
         <div className="song-card" >
             {!togglePanel &&
             <div onClick={toggle}>
-            <p className="song-title">Track: {name}</p>
-            {/* <ul>Artists:    
-            {   artists.map((artist, index) =>{
-                return <p key={index}>{artist}</p>
-                })
-            }
-            </ul> */}
-            <p>Duration: {mins}:{secs}</p>
+                <p className="song-title">Track: {name}</p>
+                <ul>Artists:    
+                {   artists.map((artist, index) =>{
+                    return <p key={index}>{artist}</p>
+                    })
+                }
+                </ul>
+                <p>Duration: {mins}:{secs}</p>
             </div>
             }
             
-            {!isSearching && <div>
-            <button className="songButton" onClick={editing}>EDIT</button>
-            <button className="songButton" onClick={handleDelete}>DELETE</button>
-            </div>
+            {!isSearching && 
+                <div >
+                    <button className="songButton" onClick={editing}>EDIT</button>
+                    <button className="songButton" onClick={handleDelete}>DELETE</button>
+                </div>
             }
             
             {isSearching && <button className="songButton" onClick={handleAdd}>ADD</button>}
@@ -128,7 +129,7 @@ const SongCard = props =>{
                         <button>Update</button>
                       </form>}
             {togglePanel &&
-                <div onClick={toggle}><FeaturedSong details={props.song}/></div>
+                <div classe="song-visual" onClick={toggle}><FeaturedSong details={props.song}/></div>
             }
         </>
     )

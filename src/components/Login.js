@@ -24,8 +24,7 @@ const StyledLoadMsg = styled.p`
     margin: 0 0 4px;
 `
 
-const url = 'https://frontend.spotify-song-5.now.sh/callback/'
-
+const url = `${window.location.href.replace(window.location.pathname, '')}callback/ `
 
 const Login = props =>{
 
@@ -36,6 +35,11 @@ const Login = props =>{
     const clickhandler = e =>{
         setLoadMsg("⏳...hang tight while we transfer you...⏳")
     }
+
+    const body = document.getElementsByTagName("body")
+
+    body[0].className = "";
+    body[0].classList.add("login-bg","fade-in")
 
     return(
         <div className="login-container fade-in">

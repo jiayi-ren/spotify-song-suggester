@@ -20,6 +20,11 @@ const Dashboard = props => {
         fetchData()
     }, [])
 
+    const body = document.getElementsByTagName("body")
+
+    body[0].className = "";
+    body[0].classList.add("dashboard-bg","fade-in")
+
     return (
         <div className="dashboard fade-in">
         <h2>My favorites</h2>
