@@ -24,7 +24,7 @@ const MusicPage= props => {
             return(delete song.artists)
         })
         console.log(newRecommended, "this is new recommended")
-        axiosWithAuth().post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/predict', newRecommended)
+        axiosWithAuth().post('https://cors-anywhere.herokuapp.com/http://spotify5.herokuapp.com/predict', savedSongs)
             .then(response => {
                 console.log(response, "Got the recommended data")
                 setRecommended(response.data)
