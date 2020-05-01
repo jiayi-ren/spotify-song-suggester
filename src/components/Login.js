@@ -24,7 +24,7 @@ const StyledLoadMsg = styled.p`
     margin: 0 0 4px;
 `
 
-const url = `${window.location.href.replace(window.location.pathname, '')}/callback/ `
+const url = `${window.location.href.replace(window.location.pathname, '')}callback/ `
 
 const Login = props =>{
 
