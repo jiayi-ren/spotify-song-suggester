@@ -24,11 +24,12 @@ const StyledLoadMsg = styled.p`
     margin: 0 0 4px;
 `
 
-const url = `${window.location.href.replace(window.location.pathname, '')}/callback/ `
+const url = window.location.href.replace(window.location.pathname, '')
 
 const Login = props =>{
 
-    const loginLink = `https://spotify-song-api.herokuapp.com/api/auth/spotify?redirect_url=${url}`
+    
+    const loginLink = `https://spotify-song-api.herokuapp.com/api/auth/spotify?redirect_url=${url}/callback/`
 
     const [loadMsg, setLoadMsg] = useState("")
 
